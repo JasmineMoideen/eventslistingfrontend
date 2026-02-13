@@ -6520,3 +6520,21 @@ blockquote .shape {
     align-items: center;
     margin-bottom: 10px;
 }
+/* RSVP Modal  */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 95%;
+}
