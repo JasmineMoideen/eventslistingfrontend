@@ -35,12 +35,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/LineIcons.2.0.css" />
-        <link rel="stylesheet" href="css/animate.css" />
-        <link rel="stylesheet" href="css/tiny-slider.css" />
-        <link rel="stylesheet" href="css/glightbox.min.css" />
-        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/LineIcons.2.0.css" />
+        <link rel="stylesheet" href="/css/animate.css" />
+        <link rel="stylesheet" href="/css/tiny-slider.css" />
+        <link rel="stylesheet" href="/css/glightbox.min.css" />
+        <link rel="stylesheet" href="/css/main.css" />
       </head>
       <body className={`${jost.variable} ${lato.variable}`}>
         <Header />

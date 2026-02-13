@@ -1,40 +1,47 @@
-
 "use client";
 
 import { useState } from "react";
 
 export default function RSVPModal({ eventTitle, eventId }: any) {
   const [open, setOpen] = useState(false);
-   const [name, setName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const submitRSVP = async (e: any) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    await fetch(
+  try {
+    const res = await fetch(
       "http://localhost/eventslisting/wp-json/events/v1/rsvp",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           event_id: eventId,
-          name,
-          email,
+          name: name,
+          email: email,
         }),
       }
     );
+
+    const data = await res.json();
+    console.log("API response:", data);
+
     alert("RSVP saved!");
     setOpen(false);
-  };
+  } catch (err) {
+    console.error("RSVP error:", err);
+    alert("Error saving RSVP");
+  }
+};
 
   return (
     <>
       {/* RSVP Button */}
       <div className="text-center mb-5">
-        <button
-          className="btn btn-primary px-4"
-          onClick={() => setOpen(true)}
-        >
+        <button className="btn btn-primary px-4" onClick={() => setOpen(true)}>
           RSVP Now
         </button>
       </div>
