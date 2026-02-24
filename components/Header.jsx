@@ -46,7 +46,7 @@ export default function Header() {
                     </li>
 
                     <li className="nav-item">
-                      <Link href="/categoriespage">Categories</Link>
+                      <Link href="/category">Categories</Link>
                     </li>
 
                     <li className="nav-item">

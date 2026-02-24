@@ -9,7 +9,7 @@ export default function CategoryCard({ category }) {
 
   // OPTIONAL: if you later add ACF term image
   const image =
-    category.acf?.category_image?.url || "/placeholder.png";
+    category.acf?.taxonomy_image || "/placeholder.png";
 
   return (
     <div className="col-lg-4 col-md-6 col-12">
@@ -20,9 +20,9 @@ export default function CategoryCard({ category }) {
             <Image
               src={image}
               alt={title}
-              width={600}
-              height={400}
-              style={{ width: "100%", height: "auto" }}
+              width={50}
+              height={50}
+              
               unoptimized
             />
           </Link>

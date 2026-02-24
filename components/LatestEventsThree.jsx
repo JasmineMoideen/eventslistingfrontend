@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import ListingCard from "./ListingCard";
 
-export default function LatestProductsThree() {
+export default function LatestEventsThree() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);

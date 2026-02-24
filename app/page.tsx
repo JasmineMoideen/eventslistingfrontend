@@ -1,7 +1,7 @@
 
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
-import LatestProductsThree from "@/components/LatestProductsThree";
+import LatestEventsThree from "@/components/LatestEventsThree";
 import WhyChoose from "@/components/WhyChoose";
 import CallToAction from "@/components/CallToAction";
 import Pricing from "@/components/Pricing";
@@ -15,7 +15,7 @@ export default function Home() {
      
       <Hero />
       <Categories />
-      <LatestProductsThree />
+      <LatestEventsThree />
       <WhyChoose />
       <CallToAction />
       <Pricing />

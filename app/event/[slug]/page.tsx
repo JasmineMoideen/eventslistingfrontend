@@ -11,10 +11,21 @@ async function getEvent(slug: string) {
   return data[0];
 }
 
+async function getRSVPStats(eventId: number) {
+  const res = await fetch(
+    `http://localhost/eventslisting/wp-json/events/v1/event/${eventId}`,
+    { cache: "no-store" },
+  );
+
+  if (!res.ok) return null;
+  return res.json();
+}
+
 export default async function EventDetail(props: any) {
   const { slug } = await props.params;
 
   const event = await getEvent(slug);
+  const stats = await getRSVPStats(event.id);
 
   if (!event) {
     return <div className="container section">Event not found</div>;
@@ -108,6 +119,31 @@ export default async function EventDetail(props: any) {
           }}
         />
       </div>
+
+      {stats && (
+        <div className="card shadow-sm border-0 p-4 mb-4 text-center">
+          <h5 className="mb-3">Event Availability</h5>
+
+          <p className="mb-2">
+            <strong>Seats Filled:</strong> {stats.rsvp_count} /{" "}
+            {stats.rsvp_limit}
+          </p>
+
+          <p
+            className={`fw-bold ${
+              stats.remaining_seats === 0 ? "text-danger" : "text-success"
+            }`}
+          >
+            Remaining Seats: {stats.remaining_seats}
+          </p>
+
+          {stats.remaining_seats === 0 && (
+            <p className="text-danger fw-bold mt-2">
+              🚫 This event is fully booked
+            </p>
+          )}
+        </div>
+      )}
 
       <RSVPModal eventTitle={event.title.rendered} eventId={event.id} />
     </div>

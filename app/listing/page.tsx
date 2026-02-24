@@ -1,10 +1,10 @@
 
-import LatestProducts from "@/components/LatestProducts";
+import LatestEvents from "@/components/LatestEvents";
 
 export default function ListingPage() {
   return (
     <main className="pt-[90px]">
-      <LatestProducts />
+      <LatestEvents />
     </main>
   );
 }
