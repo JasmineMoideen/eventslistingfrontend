@@ -15,7 +15,7 @@ export default function CategoryCard({ category }) {
     <div className="col-lg-4 col-md-6 col-12">
       <div className="single-grid">
         {/* Image */}
-        <div className="image">
+        <div className="image d-flex justify-content-center">
           <Link href={`/category/${category.slug}`} className="thumbnail">
             <Image
               src={image}
@@ -29,7 +29,7 @@ export default function CategoryCard({ category }) {
         </div>
 
         {/* Content */}
-        <div className="content">
+        <div className="content text-center">
           <div className="top-content">
             <Link href={`/category/${category.slug}`} className="tag">
               Category
@@ -45,7 +45,7 @@ export default function CategoryCard({ category }) {
             )}
           </div>
 
-          <div className="bottom-content">
+          <div className="bottom-content d-flex justify-content-center align-items-center gap-2">
             <p className="price">
               Events: <span>{count}</span>
             </p>

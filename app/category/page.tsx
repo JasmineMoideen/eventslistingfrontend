@@ -40,7 +40,7 @@ export default function Category() {
          </div>
  
          <div className="single-head">
-           <div className="row">
+           <div className="row justify-content-center g-4">
              {loading ? (
                <p>Loading events...</p>
              ) : (
