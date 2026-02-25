@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
 import Script from "next/script";
-import LatestProducts from "@/components/LatestProducts";
+import LatestEvents from "@/components/LatestEvents";
 import WhyChoose from "@/components/WhyChoose";
 import CallToAction from "@/components/CallToAction";
 import Pricing from "@/components/Pricing";

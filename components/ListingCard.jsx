@@ -1,22 +1,26 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function CategoryCard({ category }) {
-  // WordPress term fields
-  const title = category.name || "Category";
-  const description = category.description || "";
-  const count = category.count || 0;
+export default function ListingCard({ item, categories }) {
+  const acf = item.acf || {};
 
-  // OPTIONAL: if you later add ACF term image
-  const image =
-    category.acf?.category_image?.url || "/placeholder.png";
+  const title = item.title?.rendered || "Event";
+  const updated = new Date(item.modified).toLocaleDateString();
+
+  const location = acf.location_details || "Location TBD";
+  const date = acf.event_date || "";
+  const eventfinal = acf.event_end_date || "";
+  const price = acf.event_price || "Free";
+
+  const image = acf.event_image?.url || "/placeholder.png";
+  const categoryId = item["event-category"]?.[0];
+  const category = categories.find((cat) => cat.id === categoryId);
 
   return (
     <div className="col-lg-4 col-md-6 col-12">
       <div className="single-grid">
-        {/* Image */}
         <div className="image">
-          <Link href={`/category/${category.slug}`} className="thumbnail">
+          <Link href={`/event/${item.slug}`} className="thumbnail">
             <Image
               src={image}
               alt={title}
@@ -26,35 +30,40 @@ export default function CategoryCard({ category }) {
               unoptimized
             />
           </Link>
+
+          <div className="author">
+            {acf.rsvp && <p className="sale">RSVP Open</p>}
+          </div>
         </div>
 
-        {/* Content */}
         <div className="content">
           <div className="top-content">
-            <Link href={`/category/${category.slug}`} className="tag">
-              Category
+            <Link href="#" className="tag">
+              {category?.name}
             </Link>
 
-            <h3 className="title">{title}</h3>
+            <h3 className="title" dangerouslySetInnerHTML={{ __html: title }} />
 
-            {description && (
-              <p
-                className="update-time"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
-            )}
+            <p className="update-time">Event Date: {date}</p>
+
+            <ul className="info-list">
+              <li>
+                <i className="lni lni-map-marker"></i> {location}
+              </li>
+
+              <li>
+                <i className="lni lni-timer"></i> Reg Closes on: {eventfinal}
+              </li>
+            </ul>
           </div>
 
           <div className="bottom-content">
             <p className="price">
-              Events: <span>{count}</span>
+              Ticket Price: <span>${price}</span>
             </p>
 
-            <Link
-              href={`/category/${category.slug}`}
-              className="like"
-            >
-              <i className="lni lni-arrow-right"></i>
+            <Link href="#" className="like">
+              <i className="lni lni-heart"></i>
             </Link>
           </div>
         </div>
