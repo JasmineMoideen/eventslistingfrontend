@@ -18,8 +18,9 @@ export default function Categories() {
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);
-
+  
   return (
+  
     <section className="categories">
       <div className="container">
         <div className="category-slider">
@@ -40,19 +41,22 @@ export default function Categories() {
             }}
           >
             {categories.map((cat) => (
+              
               <SwiperSlide key={cat.id}>
                 <Link href={`/category/${cat.slug}`} className="single-cat">
                   <div className="icon">
+                    
                     <Image
                       src={cat.acf?.taxonomy_image || "/placeholder.png"}
                       alt={cat.name}
-                      width={40}
-                      height={40}
+                      width={200}
+                      height={100}
+                      unoptimized
                     />
                   </div>
 
-                  <h3>{cat.name}</h3>
-                  <h5 className="total">{cat.count}</h5>
+                
+                  <h5 className="total">{cat.count} Events</h5>
                 </Link>
               </SwiperSlide>
             ))}

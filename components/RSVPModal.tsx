@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RSVPModal({ eventTitle, eventId }: any) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -34,6 +36,7 @@ export default function RSVPModal({ eventTitle, eventId }: any) {
       setName("");
       setEmail("");
       setOpen(false);
+      router.refresh();
     } else {
       setMessage("❌ " + (data.message || "Something went wrong."));
     }

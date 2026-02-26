@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
         protocol: "http",
         hostname: "localhost",
         port: "",
-        pathname: "/eventslisting/wp-content/uploads/**",
+        pathname: "/**",
       },
     ],
   },

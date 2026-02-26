@@ -1,6 +1,8 @@
 import Image from "next/image";
 import RSVPModal from "@/components/RSVPModal";
 
+
+
 async function getEvent(slug: string) {
   const res = await fetch(
     `http://localhost/eventslisting/wp-json/wp/v2/event?slug=${slug}&_embed`,

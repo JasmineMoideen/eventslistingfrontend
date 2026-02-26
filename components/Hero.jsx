@@ -33,11 +33,11 @@ export default function Hero() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <h2>Welcome to ClassiGrids</h2>
+                <h2>Live. Don't Just Exist.</h2>
                 <p>
-                  Buy And Sell Everything From Used Cars To Mobile Phones And{" "}
+                  Discover the Most happening events around you
                   <br />
-                  Computers, Or Search For Property, Jobs And More.
+                  in Kochi
                 </p>
               </motion.div>
               {/* Search Form */}

@@ -7,6 +7,7 @@ import CallToAction from "@/components/CallToAction";
 import Pricing from "@/components/Pricing";
 import HowItWorks from "@/components/HowItWorks";
 import Newsletter from "@/components/Newsletter";
+import DanceEvents from "@/components/DanceEvents";
 
 
 export default function Home() {
@@ -16,10 +17,8 @@ export default function Home() {
       <Hero />
       <Categories />
       <LatestEventsThree />
-      <WhyChoose />
-      <CallToAction />
-      <Pricing />
-      <HowItWorks/>
+      <DanceEvents />
+     
       <Newsletter/>
       
     </>
