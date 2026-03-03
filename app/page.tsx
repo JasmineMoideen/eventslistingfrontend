@@ -8,6 +8,8 @@ import Pricing from "@/components/Pricing";
 import HowItWorks from "@/components/HowItWorks";
 import Newsletter from "@/components/Newsletter";
 import DanceEvents from "@/components/DanceEvents";
+import MusicEvents from "@/components/MusicEvents";
+import PartyEvents from "@/components/PartyEvents";
 
 
 export default function Home() {
@@ -18,7 +20,8 @@ export default function Home() {
       <Categories />
       <LatestEventsThree />
       <DanceEvents />
-     
+      <MusicEvents/>
+      <PartyEvents/>
       <Newsletter/>
       
     </>

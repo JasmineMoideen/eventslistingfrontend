@@ -17,8 +17,8 @@ export default function ListingCard({ item, categories }) {
   const category = categories.find((cat) => cat.id === categoryId);
 
   return (
-    <div className="col-lg-4 col-md-6 col-12">
-      <div className="single-grid">
+    <div className="col-lg-4 col-md-6 col-12 d-flex">
+      <div className="single-grid h-100 w-100">
         <div className="image">
           <Link href={`/event/${item.slug}`} className="thumbnail">
             <Image

@@ -3,16 +3,17 @@
 import { useEffect, useState } from "react";
 import ListingCard from "./ListingCard";
 
-export default function LatestEventsThree() {
+export default function MusicEvents() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // 🔹 Fetch events
   useEffect(() => {
     async function fetchEvents() {
       try {
         const res = await fetch(
-          "http://localhost/eventslisting/wp-json/wp/v2/event",
+          "http://localhost/eventslisting/wp-json/wp/v2/event"
         );
         const data = await res.json();
         setProducts(data);
@@ -25,11 +26,25 @@ export default function LatestEventsThree() {
 
     fetchEvents();
   }, []);
+
+  // 🔹 Fetch categories
   useEffect(() => {
     fetch("http://localhost/eventslisting/wp-json/wp/v2/event-category")
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);
+
+  // 🔥 Find dance category ID
+  const danceCategoryId = categories.find(
+    (c) => c.slug === "music"
+  )?.id;
+
+  // 🔥 Filter events safely
+  const danceEvents = products.filter(
+    (item) =>
+      danceCategoryId &&
+      item["event-category"]?.includes(danceCategoryId)
+  );
 
   return (
     <section className="items-grid section custom-padding">
@@ -37,10 +52,8 @@ export default function LatestEventsThree() {
         <div className="row">
           <div className="col-12">
             <div className="section-title">
-              <h2>Latest Events</h2>
-              <p>
-                There are many variations of passages of Lorem Ipsum available.
-              </p>
+              <h2>Music Events</h2>
+              <p>Explore upcoming music events.</p>
             </div>
           </div>
         </div>
@@ -49,8 +62,16 @@ export default function LatestEventsThree() {
           <div className="row">
             {loading ? (
               <p>Loading events...</p>
+            ) : danceEvents.length === 0 ? (
+              <p>No music events found.</p>
             ) : (
-              products.slice(0,3).map((item) => <ListingCard key={item.id} item={item} categories={categories} />)
+              danceEvents.map((item) => (
+                <ListingCard
+                  key={item.id}
+                  item={item}
+                  categories={categories}
+                />
+              ))
             )}
           </div>
         </div>

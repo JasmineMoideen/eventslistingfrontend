@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import BuyTicketModal from "@/components/BuyTicketModal";
 
 export default function RSVPModal({ eventTitle, eventId }: any) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [buyOpen, setBuyOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -50,12 +52,26 @@ export default function RSVPModal({ eventTitle, eventId }: any) {
           <div className="alert alert-success text-center">{message}</div>
         )}
 
-        <button className="btn btn-primary px-4" onClick={() => setOpen(true)}>
-          RSVP Now
-        </button>
+        <div className="d-flex justify-content-center gap-3 flex-wrap">
+          <button
+            className="btn btn-primary px-4"
+            onClick={() => setOpen(true)}
+          >
+            RSVP Now
+          </button>
+
+          <button
+            className="btn btn-outline-primary px-4"
+            onClick={() => setBuyOpen(true)}
+          >
+            Buy Tickets
+          </button>
+        </div>
       </div>
 
-      {/* Modal */}
+      
+
+      {/* RSVP Modal */}
       {open && (
         <div className="modal-overlay">
           <div className="modal-box">
@@ -95,6 +111,14 @@ export default function RSVPModal({ eventTitle, eventId }: any) {
           </div>
         </div>
       )}
+
+      {/* Buy Ticket Modal */}
+      <BuyTicketModal
+      open={buyOpen}
+      setOpen={setBuyOpen}
+      eventId={eventId}
+      ticketPrice={200}
+    />
     </>
   );
 }

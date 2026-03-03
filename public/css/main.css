@@ -3920,6 +3920,12 @@ blockquote .shape {
   margin-bottom: 50px;
 }
 
+.single-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .items-grid .single-grid {
   -webkit-box-shadow: 0 10px 30px rgba(35, 38, 45, 0.14) !important;
   box-shadow: 0 10px 30px rgba(35, 38, 45, 0.14) !important;
