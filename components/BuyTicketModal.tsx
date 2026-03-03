@@ -1,4 +1,5 @@
 "use client";
+import Script from "next/script";
 
 import { useState } from "react";
 interface BuyTicketModalProps {
@@ -34,26 +35,29 @@ export default function BuyTicketModal({
 
     try {
       // 🔹 Step 1 — create order from your backend (NEXT STEP)
-      const res = await fetch("/api/create-razorpay-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        "http://localhost/eventslisting/wp-json/events/v1/create-order",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            amount: totalAmount * 100, // paise!
+            event_id: eventId,
+            name,
+            email,
+            phone,
+            quantity,
+          }),
         },
-        body: JSON.stringify({
-          amount: totalAmount,
-          eventId,
-          name,
-          email,
-          phone,
-          quantity,
-        }),
-      });
+      );
 
       const data = await res.json();
 
       // 🔹 Step 2 — open Razorpay
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        key: "rzp_test_SMghkKiw1mCMEv",
         amount: data.amount,
         currency: "INR",
         name: "Event Ticket",
@@ -87,6 +91,12 @@ export default function BuyTicketModal({
   };
 
   return (
+   <>
+     <Script
+      src="https://checkout.razorpay.com/v1/checkout.js"
+      strategy="lazyOnload"
+    />
+    
     <div className="modal fade show d-block" tabIndex={-1}>
       <div className="modal-dialog">
         <div className="modal-content rounded-4">
@@ -165,5 +175,6 @@ export default function BuyTicketModal({
         </div>
       </div>
     </div>
+    </>
   );
 }
