@@ -57,7 +57,7 @@ export default function BuyTicketModal({
 
       // 🔹 Step 2 — open Razorpay
       const options = {
-        key: "rzp_test_SNSjx85bb24zE8",    
+        key: "rzp_test_SNSjx85bb24zE8",
         amount: data.amount,
         currency: "INR",
         name: "Event Ticket",
@@ -65,7 +65,31 @@ export default function BuyTicketModal({
         order_id: data.orderId,
 
         handler: async function (response: any) {
+         
           alert("✅ Payment successful!");
+
+         
+          const verifyRes = await fetch(
+            "http://localhost/eventslisting/wp-json/events/v1/verify-payment",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+                email,
+                event_id: eventId,
+                quantity,
+              }),
+            },
+          );
+
+          const verifyData = await verifyRes.json();
+
+          
           setOpen(false);
         },
 
@@ -91,90 +115,90 @@ export default function BuyTicketModal({
   };
 
   return (
-   <>
-     <Script
-      src="https://checkout.razorpay.com/v1/checkout.js"
-      strategy="lazyOnload"
-    />
-    
-    <div className="modal fade show d-block" tabIndex={-1}>
-      <div className="modal-dialog">
-        <div className="modal-content rounded-4">
-          {/* Header */}
-          <div className="modal-header">
-            <h5 className="modal-title">Buy Tickets</h5>
-            <button
-              className="btn-close"
-              onClick={() => setOpen(false)}
-            ></button>
-          </div>
+    <>
+      <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        strategy="lazyOnload"
+      />
 
-          {/* Body */}
-          <div className="modal-body">
-            <div className="mb-3">
-              <label className="form-label">Full Name</label>
-              <input
-                className="form-control"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+      <div className="modal fade show d-block" tabIndex={-1}>
+        <div className="modal-dialog">
+          <div className="modal-content rounded-4">
+            {/* Header */}
+            <div className="modal-header">
+              <h5 className="modal-title">Buy Tickets</h5>
+              <button
+                className="btn-close"
+                onClick={() => setOpen(false)}
+              ></button>
             </div>
 
-            <div className="mb-3">
-              <label className="form-label">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+            {/* Body */}
+            <div className="modal-body">
+              <div className="mb-3">
+                <label className="form-label">Full Name</label>
+                <input
+                  className="form-control"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Phone</label>
+                <input
+                  className="form-control"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Ticket Quantity</label>
+                <input
+                  type="number"
+                  min={1}
+                  className="form-control"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                />
+              </div>
+
+              <div className="alert alert-info text-center">
+                Total: <strong>₹{totalAmount}</strong>
+              </div>
             </div>
 
-            <div className="mb-3">
-              <label className="form-label">Phone</label>
-              <input
-                className="form-control"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
+            {/* Footer */}
+            <div className="modal-footer">
+              <button
+                className="btn btn-secondary"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </button>
+
+              <button
+                className="btn btn-primary"
+                onClick={handlePayment}
+                disabled={loading}
+              >
+                {loading ? "Processing..." : "Pay with Razorpay"}
+              </button>
             </div>
-
-            <div className="mb-3">
-              <label className="form-label">Ticket Quantity</label>
-              <input
-                type="number"
-                min={1}
-                className="form-control"
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-              />
-            </div>
-
-            <div className="alert alert-info text-center">
-              Total: <strong>₹{totalAmount}</strong>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="modal-footer">
-            <button
-              className="btn btn-secondary"
-              onClick={() => setOpen(false)}
-            >
-              Cancel
-            </button>
-
-            <button
-              className="btn btn-primary"
-              onClick={handlePayment}
-              disabled={loading}
-            >
-              {loading ? "Processing..." : "Pay with Razorpay"}
-            </button>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 }
