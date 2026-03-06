@@ -57,7 +57,7 @@ export default function BuyTicketModal({
 
       // 🔹 Step 2 — open Razorpay
       const options = {
-        key: "rzp_test_SMghkKiw1mCMEv",
+        key: "rzp_test_SNSjx85bb24zE8",    
         amount: data.amount,
         currency: "INR",
         name: "Event Ticket",
