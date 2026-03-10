@@ -24,9 +24,9 @@ export default function ListingCard({ item, categories }) {
             <Image
               src={image}
               alt={title}
-              width={600}
-              height={400}
-              style={{ width: "100%", height: "auto" }}
+              width={400}
+              height={200}
+              
               unoptimized
             />
           </Link>
