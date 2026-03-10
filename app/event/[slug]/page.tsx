@@ -15,12 +15,14 @@ async function getEvent(slug: string) {
 
 async function getRSVPStats(eventId: number) {
   const res = await fetch(
-    `http://localhost/eventslisting/wp-json/events/v1/event/${eventId}`,
+    `http://localhost/eventslisting/wp-json/events/v1/event-seats/${eventId}`,
     { cache: "no-store" },
   );
 
   if (!res.ok) return null;
-  return res.json();
+
+  const data = await res.json();
+  return data.data; // because API returns { success: true, data: {...} }
 }
 
 export default async function EventDetail(props: any) {
@@ -28,6 +30,7 @@ export default async function EventDetail(props: any) {
 
   const event = await getEvent(slug);
   const stats = await getRSVPStats(event.id);
+  const seatsFilled = stats.rsvp_count + stats.tickets_sold;
 
   if (!event) {
     return <div className="container section">Event not found</div>;
@@ -125,10 +128,10 @@ export default async function EventDetail(props: any) {
       {stats && (
         <div className="card shadow-sm border-0 p-4 mb-4 text-center">
           <h5 className="mb-3">Event Availability</h5>
-
+            
           <p className="mb-2">
-            <strong>Seats Filled:</strong> {stats.rsvp_count} /{" "}
-            {stats.rsvp_limit}
+            <strong>Seats Filled:</strong> {seatsFilled}/{" "}
+            {stats.total_seats}
           </p>
 
           <p

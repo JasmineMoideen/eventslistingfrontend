@@ -1,6 +1,6 @@
 "use client";
 import Script from "next/script";
-
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 interface BuyTicketModalProps {
   open: boolean;
@@ -15,6 +15,7 @@ export default function BuyTicketModal({
   eventId,
   ticketPrice = 200,
 }: BuyTicketModalProps) {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -65,10 +66,8 @@ export default function BuyTicketModal({
         order_id: data.orderId,
 
         handler: async function (response: any) {
-         
           alert("✅ Payment successful!");
 
-         
           const verifyRes = await fetch(
             "http://localhost/eventslisting/wp-json/events/v1/verify-payment",
             {
@@ -88,9 +87,10 @@ export default function BuyTicketModal({
           );
 
           const verifyData = await verifyRes.json();
-
-          
-          setOpen(false);
+          if (verifyData.success) {
+            setOpen(false);
+            router.refresh(); // 🔄 refresh server component to update seats
+          }
         },
 
         prefill: {
