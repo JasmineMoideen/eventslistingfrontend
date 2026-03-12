@@ -11,6 +11,7 @@ import Pricing from "@/components/Pricing";
 import HowItWorks from "@/components/HowItWorks";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
+import EventChatWidget from "@/components/EventChatWidget";
 
 export const metadata = {
   title: "Eventsdirectory",
@@ -46,6 +47,7 @@ export default function RootLayout({
         <Header />
 
         {children}
+        <EventChatWidget />
 
         <Footer />
 
