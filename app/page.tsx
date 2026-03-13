@@ -1,4 +1,3 @@
-
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
 import LatestEventsThree from "@/components/LatestEventsThree";
@@ -11,19 +10,17 @@ import DanceEvents from "@/components/DanceEvents";
 import MusicEvents from "@/components/MusicEvents";
 import PartyEvents from "@/components/PartyEvents";
 
-
 export default function Home() {
   return (
     <>
-     
       <Hero />
       <Categories />
       <LatestEventsThree />
       <DanceEvents />
-      <MusicEvents/>
-      <PartyEvents/>
-      <Newsletter/>
-      
+      <MusicEvents />
+      <PartyEvents />
+      <Newsletter />
+     
     </>
   );
 }
