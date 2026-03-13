@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 async function getEventsBySlug(slug: string) {
   const catRes = await fetch(
     `http://localhost/eventslisting/wp-json/wp/v2/event-category?slug=${slug}`,
@@ -34,6 +36,7 @@ export default async function CategoryPage(props: {
 
           return (
             <div key={event.id} className="col-lg-4 col-md-6 col-12">
+               <Link href={`/event/${event.slug}`} className="text-decoration-none">
               <div className="single-grid">
                 <div className="image">
                 <img
@@ -55,6 +58,7 @@ export default async function CategoryPage(props: {
                   }}
                 />
               </div>
+              </Link>
             </div>
           );
         })}
