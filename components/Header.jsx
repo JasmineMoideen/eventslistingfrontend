@@ -53,38 +53,15 @@ export default function Header() {
                       <Link href="/listing">Listings</Link>
                     </li>
 
-                    <li className="nav-item">
-                      <Link href="#">Pages</Link>
-                    </li>
+                  
 
-                    <li className="nav-item">
-                      <Link href="#">Blog</Link>
-                    </li>
+                   
                   </ul>
                 </div>
 
-                {/* Login */}
-                <div className="login-button">
-                  <ul>
-                    <li>
-                      <Link href="#">
-                        <i className="lni lni-enter"></i> Login
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="#">
-                        <i className="lni lni-user"></i> Register
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+                
 
-                {/* CTA */}
-                <div className="button header-button">
-                  <Link href="#" className="btn">
-                    Post an Ad
-                  </Link>
-                </div>
+               
               </nav>
             </div>
           </div>
